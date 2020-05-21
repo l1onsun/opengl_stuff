@@ -417,14 +417,12 @@ public:
         _groups[id][unit] = box;
     }
     void handle_collisions() {
-        //std::cout<<"handling " <<std::endl;
         for (auto const& map_ : _groups) {
             int current_group_id = map_.first;
             const std::map<Unit*, glm::vec3>& units = map_.second;
             const std::set<int>& rivals = _group_rivals[current_group_id];
             for (auto const& current_unit : units) {
                 for (int rival_group_id : rivals) {
-                    std::cout << current_unit.first << '|' << rival_group_id << std::endl;
                     const std::map<Unit*, glm::vec3>& rival_units = _groups[rival_group_id];
                     for (auto const& rival_unit: rival_units) {
                         bool collision = _check_collision(
@@ -445,7 +443,7 @@ private:
         GLfloat y_, _y;
         GLfloat z_, _z;
     };
-    rect static _unit_to_rect(std::pair<Unit*, glm::vec3> unit) {
+    rect _unit_to_rect(std::pair<Unit*, glm::vec3> unit) {
         rect rect;
         glm::vec3 pos = unit.first->get_pos();
         rect._x = pos.x + unit.second.x/2;

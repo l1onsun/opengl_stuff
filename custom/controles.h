@@ -1,4 +1,4 @@
-    #ifndef CONTROLE_H
+#ifndef CONTROLE_H
 #define CONTROLE_H
 
 #include<engine.h>
@@ -62,7 +62,7 @@ void fireball_controle(Loop* loop) {
         fireball_pressed = true;
         Fireball* new_fireball = new Fireball(win.get_camera_pos() + win.get_camera_right(), win.get_camera_dir() * 0.0001f);
         loop->collision_controller.add_to_group(Fireball::id, new_fireball, glm::vec3(1, 1, 1));
-        fireball_set.insert(new Fireball(win.get_camera_pos() + win.get_camera_right(), win.get_camera_dir() * 0.0001f));
+        fireball_set.insert(new_fireball);
     }
     if (win.key_released(GLFW_KEY_E)) fireball_pressed = false;
     for (auto fireball = fireball_set.begin(); fireball != fireball_set.end();) {

@@ -4,7 +4,7 @@
 
 int main() {
     Window win = Window("ogl-staff", 950, 1000);
-    win.set_camera(glm::vec3(10, 5, 10), 0, 0);
+    win.set_camera(glm::vec3(0, 5, -10), 0, 0);
 
     Piramid::load_model();
     Fireball::load_model();
@@ -16,9 +16,9 @@ int main() {
     loop.collision_controller.create_group(Fireball::id, {Piramid::id});
 
 
-    Unit sphere = Unit(sph_, glm::vec3(0, 5, 0));
+    Unit* sphere = new Unit(sph_, glm::vec3(0, 5, 0));
     loop.add_func([&](Loop* loop) {
-        sphere.draw(*loop->window());
+        sphere->draw(*loop->window());
     });
 
 
