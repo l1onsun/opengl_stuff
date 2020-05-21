@@ -243,9 +243,8 @@ public:
     glm::vec3 get_pos() {
         return _pos;
     }
-    bool visible() {
-        return _visible;
-    }
+    bool visible() {return _visible;}
+    void visible(bool flag) {_visible = flag;}
     virtual void on_collision(int id) {}
 protected:
     virtModel* model;

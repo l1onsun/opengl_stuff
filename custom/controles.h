@@ -22,6 +22,11 @@ void piramid_controller(Loop* loop) {
         piramids[i]->draw(*loop->window());
         piramids[i]->idle(loop->scaled_delta());
     }
+    if (loop->window()->key_pressed(GLFW_KEY_R)) {
+        for (int i=0; i < PiramidNum; i++) {
+            piramids[i]->visible(true);
+        }
+    }
 }
 
 void movement_controle(Loop* loop) {
