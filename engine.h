@@ -12,7 +12,10 @@
 #include <string>
 #include <functional>
 #include <chrono>
-#include <unistd.h>
+
+#include <thread>
+// #include <unistd.h>
+#include <windows.h>
 
 
 #include <GL/glew.h>
@@ -482,10 +485,14 @@ public:
             _win->end_frame();
 
             auto frame_end = std::chrono::steady_clock::now();
-            auto frame_duration = std::chrono::duration_cast<std::chrono::microseconds> (frame_end - frame_start).count();
-            auto sleep_required = 1000000.0 / target_fps  - frame_duration;
+            auto frame_duration = frame_end - frame_start;
+            auto sleep_required = std::chrono::duration<double>(1.0 / target_fps)  - frame_duration;
+
+            std::cout << "frame duration: " << frame_duration.count() << std::endl;
+            std::cout << "sleep required: " << sleep_required.count() << std::endl;
+
             //WARNING not cross-platform solution;
-            if (sleep_required > 0) usleep(sleep_required);
+            if (sleep_required.count() > 0) std::this_thread::sleep_for(sleep_required);
         }
         while(_win->exit_check());
     }
